@@ -1,0 +1,62 @@
+[
+    {
+      "product_id": 501,
+      "product": "Portland Cement 50kg",
+      "sku": "CEMENT-50KG",
+      "warehouse": {
+        "id": 10,
+        "name": "Dubai Main Warehouse"
+      },
+      "stock": {
+        "on_hand": 2500,
+        "reserved": 800,
+        "available": 1700,
+        "unit": "bags"
+      },
+      "reorder": {
+        "reorder_level": 1000,
+        "reorder_quantity": 3000,
+        "needs_reorder": false
+      }
+    },
+    {
+      "product_id": 502,
+      "product": "Steel Rebar 12mm",
+      "sku": "REBAR-12MM",
+      "warehouse": {
+        "id": 10,
+        "name": "Dubai Main Warehouse"
+      },
+      "stock": {
+        "on_hand": 2200,
+        "reserved": 1800,
+        "available": 400,
+        "unit": "pieces"
+      },
+      "reorder": {
+        "reorder_level": 1000,
+        "reorder_quantity": 5000,
+        "needs_reorder": true
+      }
+    },
+    {
+      "product_id": 503,
+      "product": "Concrete Blocks",
+      "sku": "BLOCK-20CM",
+      "warehouse": {
+        "id": 11,
+        "name": "Jebel Ali Warehouse"
+      },
+      "stock": {
+        "on_hand": 5000,
+        "reserved": 1200,
+        "available": 3800,
+        "unit": "pieces"
+      },
+      "reorder": {
+        "reorder_level": 1500,
+        "reorder_quantity": 4000,
+        "needs_reorder": false
+      }
+    }
+  ]

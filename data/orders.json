@@ -1,0 +1,86 @@
+[
+    {
+      "order_id": 12345,
+      "order_number": "SO-12345",
+      "customer": {
+        "id": 1001,
+        "name": "ABC Construction LLC"
+      },
+      "status": "confirmed",
+      "order_date": "2026-08-15",
+      "currency": "AED",
+      "total_amount": 125000.0,
+      "items": [
+        {
+          "product_id": 501,
+          "product": "Portland Cement 50kg",
+          "quantity": 500,
+          "unit_price": 25.0,
+          "total": 12500.0
+        },
+        {
+          "product_id": 502,
+          "product": "Steel Rebar 12mm",
+          "quantity": 1000,
+          "unit_price": 112.5,
+          "total": 112500.0
+        }
+      ]
+    },
+    {
+      "order_id": 12346,
+      "order_number": "SO-12346",
+      "customer": {
+        "id": 1002,
+        "name": "Dubai Infrastructure Projects"
+      },
+      "status": "processing",
+      "order_date": "2026-08-14",
+      "currency": "AED",
+      "total_amount": 78500.0,
+      "items": [
+        {
+          "product_id": 503,
+          "product": "Concrete Blocks",
+          "quantity": 2000,
+          "unit_price": 15.0,
+          "total": 30000.0
+        },
+        {
+          "product_id": 501,
+          "product": "Portland Cement 50kg",
+          "quantity": 1940,
+          "unit_price": 25.0,
+          "total": 48500.0
+        }
+      ]
+    },
+    {
+      "order_id": 12347,
+      "order_number": "SO-12347",
+      "customer": {
+        "id": 1003,
+        "name": "Gulf Commercial Developers"
+      },
+      "status": "pending",
+      "order_date": "2026-08-13",
+      "currency": "AED",
+      "total_amount": 215000.0,
+      "items": [
+        {
+          "product_id": 502,
+          "product": "Steel Rebar 12mm",
+          "quantity": 1500,
+          "unit_price": 112.5,
+          "total": 168750.0
+        },
+        {
+          "product_id": 504,
+          "product": "Structural Steel Beam",
+          "quantity": 250,
+          "unit_price": 185.0,
+          "total": 46250.0
+        }
+      ]
+    }
+  ]

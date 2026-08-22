@@ -1,0 +1,53 @@
+[
+    {
+      "vendor_id": 2001,
+      "vendor_code": "VEN-2001",
+      "company_name": "Gulf Building Materials Trading LLC",
+      "status": "active",
+      "country": "United Arab Emirates",
+      "contact": {
+        "email": "sales@gulfmaterials.example",
+        "phone": "+971-4-555-0123"
+      },
+      "payment_terms": "Net 30",
+      "rating": 4.5,
+      "supplied_products": [
+        "Portland Cement 50kg",
+        "Concrete Blocks"
+      ]
+    },
+    {
+      "vendor_id": 2002,
+      "vendor_code": "VEN-2002",
+      "company_name": "Emirates Steel Supply",
+      "status": "active",
+      "country": "United Arab Emirates",
+      "contact": {
+        "email": "sales@emiratessteel.example",
+        "phone": "+971-2-555-0198"
+      },
+      "payment_terms": "Net 45",
+      "rating": 4.8,
+      "supplied_products": [
+        "Steel Rebar 12mm",
+        "Structural Steel Beam"
+      ]
+    },
+    {
+      "vendor_id": 2003,
+      "vendor_code": "VEN-2003",
+      "company_name": "Dubai Construction Supplies",
+      "status": "active",
+      "country": "United Arab Emirates",
+      "contact": {
+        "email": "orders@dcsupplies.example",
+        "phone": "+971-4-555-0177"
+      },
+      "payment_terms": "Net 30",
+      "rating": 4.2,
+      "supplied_products": [
+        "Concrete Blocks",
+        "Structural Steel Beam"
+      ]
+    }
+  ]
