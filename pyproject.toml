@@ -1,11 +1,9 @@
 [project]
-name = "mcp_mhu"
+name = "erp-mcp-server"
 version = "0.1.0"
-description = "Add your description here"
+description = "FastMCP server exposing ERP tools (sales orders, stock, vendors) over the Model Context Protocol."
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
-    "gradio>=6.24.0",
-    "mcp[cli]>=1.0,<2.0",
-    "openai>=3.1.0",
+    "mcp[cli]>=1.20,<2.0",
 ]

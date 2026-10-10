@@ -1,42 +1,85 @@
-
-
-
 # ERP MCP Server
 
-A Python-based backend server demonstrating the deployment of custom business tools using the **Model Context Protocol (MCP)**. This project leverages Anthropic's **FastMCP** framework to effortlessly expose standard enterprise data sources (Orders, Inventory, and Vendors) as structured tools for LLM consumption.
+A [Model Context Protocol](https://modelcontextprotocol.io) server that exposes ERP data (sales orders, inventory and vendors) as tools any MCP-compatible client or AI agent can discover and call. Built with FastMCP and served over streamable HTTP.
 
-For demonstration pursposes, It is designed to read localized mock databases and seamlessly host them over an MCP-compliant transport layer.
+> **Pairs with [ERP MCP Client](https://github.com/mulangph/AI_MCP_Client)**, a Gradio chatbot that uses these tools to answer business questions in plain language.
 
----
+## How it fits together
 
-## 🚀 Key Features
-
-* **FastMCP Integration:** Uses the high-level FastMCP wrapper to automatically generate schemas and expose functions as LLM-callable tools.
-* **Granular ERP Modules:** Separate endpoints to pull distinct, isolated datasets for Orders, Inventory quantities, and Vendor metadata.
-* **JSON-backed Persistence:** Simulates production database interactions using lightweight, predictable JSON flat files.
-* **Robust Error Handling:** Returns well-formed JSON error schemas to gracefully inform LLMs when lookups fail.
-
----
-
-## 🛠️ Exposed Tools
-
-The server dynamically broadcasts four main developer tools to any connected client:
-
-1. `get_sales_order(order_id: int)`: Fetches precise sales order data including statuses, pricing, and transactional lines.
-2. `get_stock(product_id: int)`: Checks inventory tables for real-time stock levels and reorder parameters.
-3. `get_vendor(vendor_id: int)`: Looks up explicit business credentials, risk profiles, and payment cycles for a single partner.
-4. `get_vendors_information()`: Pulls the comprehensive registry of all active vendors for broad analytical overviews.
-
-
-## Installation
-
-Add the required dependencies individually using `uv` (this will automatically fetch the latest versions):
-
-```bash
-uv add gradio
-uv add "mcp[cli]"
-uv add openai
+```mermaid
+flowchart LR
+    U[User] --> C[ERP MCP Client<br/>Gradio + OpenAI]
+    C -- "list_tools / call_tool<br/>(streamable HTTP)" --> S[ERP MCP Server<br/>FastMCP]
+    S --> D[(JSON data<br/>orders, stock, vendors)]
 ```
 
-## To Run The server
-uv run mcp run server.py --transport streamable-http
+The client asks the server which tools exist, hands them to the LLM, and runs whichever tools the model chooses. The server never talks to the LLM directly, so any MCP client (Claude Desktop, MCP Inspector, your own agent) can use it.
+
+## Tools
+
+| Tool | Input | Returns |
+|---|---|---|
+| `get_sales_order` | `order_id` (e.g. `12345`) | Customer, status, date, currency, total, line items |
+| `get_stock` | `product_id` (e.g. `501`) | On-hand / reserved / available quantity, warehouse, reorder status |
+| `get_vendor` | `vendor_id` (e.g. `2001`) | Status, contact, payment terms, rating, supplied products |
+| `get_vendors_information` | none | All vendors |
+
+Unknown IDs return a JSON error object such as `{"error": "Product not found", "product_id": 999}` so the model can explain the problem instead of failing.
+
+## Quick start
+
+Requires Python 3.12 and [uv](https://docs.astral.sh/uv/).
+
+```bash
+git clone https://github.com/mulangph/AI_MCP_Server.git
+cd AI_MCP_Server
+uv sync
+uv run server.py
+```
+
+The server listens on **http://127.0.0.1:8000/mcp**. Leave it running, then start the [client](https://github.com/mulangph/AI_MCP_Client) in a second terminal.
+
+To use a different host or port, set `MCP_HOST` and `MCP_PORT` before starting:
+
+```bash
+MCP_PORT=9000 uv run server.py
+```
+
+### Inspect the tools without a client
+
+The MCP Inspector lets you browse and call tools in your browser:
+
+```bash
+uv run mcp dev server.py
+```
+
+## Sample data
+
+The `data/` folder holds mock records you can query straight away:
+
+| File | IDs |
+|---|---|
+| `orders.json` | 12345, 12346, 12347 |
+| `stock_quant.json` | 501, 502, 503 |
+| `vendors.json` | 2001, 2002, 2003 |
+
+## Project structure
+
+```
+AI_MCP_Server/
+├── server.py          # MCP tool definitions and entry point
+├── data/              # Mock ERP records
+├── pyproject.toml
+└── uv.lock
+```
+
+## Roadmap
+
+- [ ] Replace JSON files with a real ERP API (e.g. Odoo)
+- [ ] Search tools (orders by customer, products by name)
+- [ ] Authentication on the HTTP endpoint
+- [ ] Tests for each tool
+
+## License
+
+MIT
